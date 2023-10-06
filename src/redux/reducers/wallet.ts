@@ -1,8 +1,9 @@
 import { AnyAction } from 'redux';
-import { ADD_EXPENSES } from '../actions';
+import { ADD_CURRENCIES, ADD_EXPENSES } from '../actions';
 
 const INITIAL_STATE = {
-  expenses: 0,
+  expenses: [],
+  currencies: [],
 };
 
 export const walletReducer = (state = INITIAL_STATE, action:AnyAction) => {
@@ -10,7 +11,15 @@ export const walletReducer = (state = INITIAL_STATE, action:AnyAction) => {
     case ADD_EXPENSES:
       return {
         ...state,
-        expenses: action.payload + state.expenses,
+        expenses: [
+          ...state.expenses,
+          action.payload,
+        ],
+      };
+    case ADD_CURRENCIES:
+      return {
+        ...state,
+        currencies: action.payload,
       };
     default:
       return state;
